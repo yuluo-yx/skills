@@ -28,21 +28,36 @@
 
 ## 安装
 
-将本目录复制或软链接到本地技能目录即可。
-
-示例：
+推荐在仓库根目录执行：
 
 ```bash
-cp -R chinese-document-writing ~/.codex/skills/
+bash scripts/install-chinese-document-writing.sh
 ```
 
-或：
+默认会同时安装到：
+
+- Codex：`~/.codex/skills/chinese-document-writing`
+- Claude Code：`~/.claude/skills/chinese-document-writing`
+
+如果只想安装到单个平台：
 
 ```bash
+bash scripts/install-chinese-document-writing.sh --codex-only
+```
+
+```bash
+bash scripts/install-chinese-document-writing.sh --claude-only
+```
+
+如果希望复制目录而不是软链接，可以追加 `--copy`。
+
+手动安装示例：
+
+```bash
+mkdir -p ~/.codex/skills ~/.claude/skills
 ln -s "$(pwd)/chinese-document-writing" ~/.codex/skills/chinese-document-writing
+ln -s "$(pwd)/chinese-document-writing" ~/.claude/skills/chinese-document-writing
 ```
-
-如果你的客户端使用其他技能目录，请替换目标路径。
 
 ## 使用方式
 
@@ -57,6 +72,8 @@ ln -s "$(pwd)/chinese-document-writing" ~/.codex/skills/chinese-document-writing
 ```
 
 如果客户端支持隐式触发，在任务明显属于中文技术文档写作、润色或审校时，也可以自动调用。
+
+回滚方式：删除 `~/.codex/skills/chinese-document-writing` 或 `~/.claude/skills/chinese-document-writing` 即可。
 
 ## 技能特点
 
