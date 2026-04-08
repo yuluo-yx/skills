@@ -1,0 +1,7 @@
+interface:
+  display_name: "中文文档书写"
+  short_description: "按统一中文技术文档规范进行写作、改写、润色与审校"
+  default_prompt: "使用 $chinese-document-writing 按统一中文技术文档规范起草这份中文文档。"
+
+policy:
+  allow_implicit_invocation: true
