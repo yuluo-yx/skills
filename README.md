@@ -1,6 +1,6 @@
 # Skills
 
-Shown Skills，分享一些有用的 skills。
+分享一些有用的 skills。
 
 ## 已收录技能
 
