@@ -1,68 +1,96 @@
-# Skills
+# chinese-document-writing
 
-分享一些有用的 skills。
+用于撰写、改写、校对或审阅中文技术文档及相关产品、界面文案的技能。
 
-## 已收录技能
+适用于 README、安装指南、FAQ、接口文档、产品说明、知识库文章、发布说明、操作手册和故障排查。优先保留事实、条件、限制与机器可读内容，再改善结构、措辞和排版。
 
-| 技能名 | 说明 | 目录 |
-| --- | --- | --- |
-| `chinese-document-writing` | 统一中文技术文档的写作、改写、润色与审校规范 | [`./chinese-document-writing`](./chinese-document-writing) |
+## 包含内容
 
-## 仓库结构
+- `SKILL.md`：技能定义、触发条件、工作流与输出要求
+- `references/style-rules.md`：中文技术文档风格规则
+- `references/templates.md`：常见文档结构模板
+- `references/checklist.md`：交付前自检清单
+- `references/api-status-copy.md`：API 参数、状态与错误文案
+- `references/controlled-technical-chinese.md`：操作步骤、风险与故障排查规则
+- `references/sources.md`：来源版本、采用范围与许可说明
+- `references/fenng-license.txt`：Fenng 上游的 MIT 许可
+- `agents/openai.yaml`：客户端展示名称与默认提示词
 
-```text
-.
-├── LICENSE
-├── README.md
-├── scripts/
-├── CONTRIBUTING.md
-└── chinese-document-writing/
-    ├── README.md
-    ├── SKILL.md
-    ├── agents/
-    └── references/
-```
+## 适用场景
+
+以下场景适合使用这个技能：
+
+- 重写杂乱的中文 README
+- 统一团队文档的标题、标点、数字和术语风格
+- 把零散笔记整理成正式的操作手册或知识库文章
+- 审校发布说明、FAQ 或产品说明文档
+
+以下场景通常不需要单独调用：
+
+- 只翻译一个短句
+- 只改一个按钮文案，且没有明确要求应用本规范
 
 ## 安装
 
-推荐在仓库根目录直接执行安装脚本：
+仓库根目录就是技能目录，包含 `SKILL.md`、`agents/`、`references/` 和 `scripts/`。在根目录执行：
 
 ```bash
 bash scripts/install-chinese-document-writing.sh
 ```
 
-默认会同时安装到以下位置：
+默认会同时安装到：
 
 - Codex：`~/.codex/skills/chinese-document-writing`
 - Claude Code：`~/.claude/skills/chinese-document-writing`
-- 默认使用软链接，仓库更新后会立即生效
 
-可选参数：
+如果只想安装到单个平台：
 
-- `--codex-only`：仅安装到 Codex
-- `--claude-only`：仅安装到 Claude Code
-- `--copy`：改为复制目录
-- `--force`：覆盖现有目标
+```bash
+bash scripts/install-chinese-document-writing.sh --codex-only
+```
+
+```bash
+bash scripts/install-chinese-document-writing.sh --claude-only
+```
+
+如果希望复制技能文件而不是软链接，可以追加 `--copy`；复制安装不包含 `.git` 或仓库临时文件。已有安装可使用 `--force` 更新。
 
 手动安装示例：
 
 ```bash
 mkdir -p ~/.codex/skills ~/.claude/skills
-ln -s "$(pwd)/chinese-document-writing" ~/.codex/skills/chinese-document-writing
-ln -s "$(pwd)/chinese-document-writing" ~/.claude/skills/chinese-document-writing
+ln -s "$(pwd)" ~/.codex/skills/chinese-document-writing
+ln -s "$(pwd)" ~/.claude/skills/chinese-document-writing
 ```
 
-如果你只需要其中一个客户端，保留对应那一行即可。
+## 使用方式
 
-## 使用
+显式调用示例：
 
-安装完成后，可以在 Codex 和 Claude Code 中显式或隐式调用：
+```text
+使用 $chinese-document-writing 把这份安装指南改写成正式中文技术文档。
+```
 
-- 显式调用：`使用 $chinese-document-writing 重写这份 README。`
-- 隐式调用：当任务明显是中文技术文档写作、润色或审校时，由支持技能自动触发的客户端自动使用
+```text
+使用 $chinese-document-writing 审校这份 README，统一标题层级、标点和术语。
+```
 
-各技能的详细说明、触发条件与参考资料见对应目录下的 `README.md` 与 `SKILL.md`。
+如果客户端支持隐式触发，在任务明显属于中文技术文档写作、润色或审校时，也可以自动调用。
 
-## 致谢
+卸载时移除对应安装目录；软链接安装使用 `unlink ~/.codex/skills/chinese-document-writing` 或 `unlink ~/.claude/skills/chinese-document-writing`，不会删除仓库内容。
 
-`chinese-document-writing` 技能整理参考了 [ruanyf/document-style-guide](https://github.com/ruanyf/document-style-guide) 中的中文技术文档规范。
+从旧的嵌套结构升级时，在仓库根目录重新运行安装脚本并追加 `--force`，将安装路径从 `chinese-document-writing/` 改为仓库根目录；技能名称与调用方式不变。
+
+## 技能特点
+
+- 区分撰写、改写、校对与审阅，按授权范围修改
+- 保留事实、确定程度、条件、风险和机器可读内容，明确资料缺口
+- 按需读取结构模板、API 文案和操作手册规则
+- 默认采用直角引号、中西文留白和中文 Markdown 一段一行，服从目标项目约定
+- 交付前对照来源复核，避免排版修改影响语义或代码
+
+## 参考来源
+
+本技能融合 [ruanyf/document-style-guide](https://github.com/ruanyf/document-style-guide) 和 Fenng 的 [tech-doc-style-chinese](https://github.com/Fenng/tech-doc-style-chinese) 规范。上游版本、采用范围、许可及原有规则的调整见 [来源说明](references/sources.md)。
+
+旧的 `tech-doc-style-chinese` 使用入口可替换为 `$chinese-document-writing`。这是写作规范整合，不涉及产品数据迁移；没有迁入上游的检查脚本、测试或远端 workflow。
